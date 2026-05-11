@@ -1,15 +1,13 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 from jobs.models import Job
 
-def job_list_view(request):
-    query = request.GET.get('search', '')
-    jobs = Job.objects.all()
+class job_list_view(ListView):
+    model = Job
+    template_name = 'jobs/joblist.html'
+    context_object_name = 'jobs'
     
-    if query:
-        jobs = jobs.filter(title__icontains=query)
-        
-    return render(request, 'jobs/joblist.html', {
-        'jobs': jobs,
-        'query': query,
-        'count': jobs.count()
-    })
+    def get_queryset(self):
+        query = self.request.GET.get('search' , '')
+        if query:
+            return Job.objects.filter(title__icontains=query)
+        return Job.objects.all()

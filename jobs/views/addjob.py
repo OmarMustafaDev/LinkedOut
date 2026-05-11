@@ -1,17 +1,13 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from jobs.forms import JobForm
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from jobs.models import Job
 
-@login_required
-def add_job_view(request):
-    if request.method == "POST":
-        form = JobForm(request.POST)
-        if form.is_valid():
-            job = form.save(commit=False)
-            job.posted_by = request.user
-            job.company_name = getattr(request.user, 'company_name', 'Tech Company')
-            job.save()
-            return redirect('jobs:dashboard')
-    else:
-        form = JobForm()
-    return render(request, 'jobs/addjob.html', {'form': form})
+class add_job_view(CreateView):
+    model = Job
+    fields = ['title', 'min_salary', 'max_salary', 'status', 'experience_required', 'city', 'country', 'description']
+    template_name = 'jobs/addjob.html'
+    success_url = reverse_lazy('jobs:job_list')
+
+    def form_valid(self, form):
+        form.instance.posted_by = self.request.user 
+        return super().form_valid(form)
