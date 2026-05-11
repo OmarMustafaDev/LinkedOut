@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'jobs/css/joblist.css' %}">
+<div class="container">
+    <header>
+        <h1>Search Jobs</h1>
+    </header>
+
+    <form method="get" action="{% url 'jobs:job_list' %}">
+        <input type="text" name="search" id="search" placeholder="Search by job title..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <p class="jobs-count">{{ count }} jobs found</p>
+
+    <div id="jobs-container">
+        {% for job in jobs %}
+        <div class="job">
+            <div class="job-header">
+                <h3>{{ job.title }}</h3>
+                <span class="status {{ job.status }}">{{ job.status }}</span>
+            </div>
+            <p><strong>Company:</strong> {{ job.company_name }}</p>
+            <p><strong>Location:</strong> {{ job.city }}, {{ job.country }}</p>
+            <p><strong>Experience Required:</strong> {{ job.experience_required }} Years</p>
+            <p><strong>Salary Range:</strong> ${{ job.min_salary }} - ${{ job.max_salary }}</p>
+            <p><strong>Description:</strong> {{ job.description }}</p>
+            <hr>
+            <p><small>Posted by: {{ job.posted_by.get_full_name }}</small></p>
+            <button type="button" onclick="location.href='{% url 'jobs:job_detail' job.id %}'">View Details</button>
+        </div>
+        {% empty %}
+        <p>No jobs found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

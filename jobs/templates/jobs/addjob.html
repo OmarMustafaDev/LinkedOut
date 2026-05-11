@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'jobs/css/addjob.css' %}">
+<header>
+    <h1>Add New Job</h1>
+</header>
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <p>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <br>
+                {{ field }}
+                {% if field.errors %}
+                    <span style="color: red;">{{ field.errors.0 }}</span>
+                {% endif %}
+            </p>
+        {% endfor %}
+        <div class="buttons">
+            <button type="submit">Create Job</button>
+            <button type="button" onclick="location.href='{% url 'jobs:job_list' %}'">Cancel</button>
+        </div>    
+    </form>
+</div>
+{% endblock %}
