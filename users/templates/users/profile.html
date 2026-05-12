@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Account Profile{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'users/css/Profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Account Profile</h1>
+
+    <div class="info-section" id="info-section">
+        <h2>Personal Information</h2>
+        <p><strong>Name:</strong> <span>{{ user.fname }} {{ user.lname }}</span></p>
+        <p><strong>Email:</strong> <span>{{ user.email }}</span></p>
+
+        {% if user.role == "user" %}
+        <p><strong>Telephone Number:</strong> <span>{{ user.phone|default:"Not provided" }}</span></p>
+        {% elif user.role == "admin" %}
+        <p><strong>Company:</strong> <span>{{ user.company_name|default:"Not provided" }}</span></p>
+        {% endif %}
+    </div>
+
+    {% if user.role == "user" %}
+    <div class="info-section" id="experience-section">
+        <h2>Your Experience</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="description">Update your experience description:</label>
+            <textarea id="description" name="description" rows="10" cols="60"
+                placeholder="Write a brief description of your professional experiences...">{{ user.description }}</textarea>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+    {% endif %}
+
+    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Log out</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'users/js/Profile.js' %}"></script>
+{% endblock %}

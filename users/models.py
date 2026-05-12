@@ -31,6 +31,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     role = models.CharField(max_length=10, choices=roles, default='user')
     company_name = models.CharField(max_length=255, null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
+    description = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
