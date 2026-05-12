@@ -87,7 +87,7 @@ DATABASES = {
 # Custom User
 
 AUTH_USER_MODEL = 'users.CustomUser'
-
+LOGIN_REDIRECT_URL ='jobs:job_list'
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
