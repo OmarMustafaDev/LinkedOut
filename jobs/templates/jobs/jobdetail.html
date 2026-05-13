@@ -43,28 +43,32 @@
         </div>
     </div>
     <div class="apply-div">
-        {% if user.is_authenticated %} {% if is_owner %}
-        <a href="{% url 'jobs:edit_job' job.pk %}" class="edit">Edit</a>
+        {% if user.is_authenticated %}
+            {% if is_owner %}
+                <a href="{% url 'jobs:edit_job' job.pk %}" class="edit">Edit</a>
 
-        <form
-            action="{% url 'jobs:delete_job' job.pk %}"
-            method="POST"
-            style="display: inline"
-        >
-            {% csrf_token %}
-            <button type="submit" class="cancel">Delete</button>
-        </form>
+                <form
+                    action="{% url 'jobs:delete_job' job.pk %}"
+                    method="POST"
+                    style="display: inline"
+                >
+                    {% csrf_token %}
+                    <button type="submit" class="cancel">Delete</button>
+                </form>
 
-        {% elif user.role == 'normal' %} {% if has_applied %}
-        <button class="apply" disabled style="background-color: green">
-            Already Applied
-        </button>
+            {% elif user.role == 'user' %} 
+                {% if has_applied %}
+                    <button class="apply" disabled style="background-color: green">
+                        Already Applied
+                    </button>
+                {% else %}
+                    <form action="{% url 'jobs:apply_now' job.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="apply">Apply Now</button>
+                    </form>
+                {% endif %} 
+            {% endif %} 
         {% else %}
-        <form action="{% url 'jobs:apply_now' job.pk %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="apply">Apply Now</button>
-        </form>
-        {% endif %} {% endif %} {% else %}
         <a href="{% url 'login' %}" class="apply">Login to Apply</a>
         {% endif %}
     </div>

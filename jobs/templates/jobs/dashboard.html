@@ -9,6 +9,7 @@
             referrerpolicy="no-referrer"
         />
         <link rel="stylesheet" href="{% static 'jobs/css/dashboard.css' %}" />
+        <link rel="stylesheet" href="{% static "css/components/dialog.css" %}">
         
     {% endblock extra_css %}
     </head>
@@ -23,15 +24,17 @@
                     </a>
                 </p>
             </header>
-            <section id="jobs-tbl">
+            <section id="jobs-tbl" {% if jobs %}style="border: 1px var(--blue-border) solid;"{% endif %}>
                 <!-- Company jobs rendered here -->
-                <div class="job dashboard-title top">
-                    <div class="job-item"><p>Job Title</p></div>
-                    <div class="job-item"><p>Salary</p></div>
-                    <div class="job-item"><p>Status</p></div>
-                    <div class="job-item"><p>Post date</p></div>
-                    <div class="job-item menu-btn"><p>Options</p></div>
-                </div>
+                {% if jobs %}
+                    <div class="job dashboard-title top">
+                        <div class="job-item"><p>Job Title</p></div>
+                        <div class="job-item"><p>Salary</p></div>
+                        <div class="job-item"><p>Status</p></div>
+                        <div class="job-item"><p>Post date</p></div>
+                        <div class="job-item menu-btn"><p>Options</p></div>
+                    </div>
+                {% endif %}
                 
                 {% for job in jobs %}
                 <div class="job">
@@ -45,6 +48,10 @@
                             onclick="dropMenu(event)"></i>
                     </div>
                 </div>
+                {% empty %}
+                    <span style="display: flex; justify-content: center; border: 0;">
+                        <p style="color: var(--text-muted);">You have no jobs. Go add some!</p>
+                    </span>
                 {% endfor %}
             </section>
         </main>
@@ -110,5 +117,6 @@
         {% endblock content %}
         {% block extra_js %}
             <script src="{% static "jobs/js/dashboard.js" %}"></script>
+            <script src="{% static "js/components/dialog.js" %}"></script>
         {% endblock extra_js %}
     

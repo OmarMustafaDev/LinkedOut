@@ -30,7 +30,6 @@ header h1 {
 .menu {
     display: flex;
     flex-direction: column;
-    border: 1px var(--blue-border) solid;
     margin-top: 2rem;
     border-radius: 1rem;
 }
