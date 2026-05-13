@@ -1,10 +1,12 @@
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from jobs.models import Job
+from jobs.forms import JobForm
 
 class add_job_view(CreateView):
     model = Job
-    fields = ['title', 'min_salary', 'max_salary', 'status', 'experience_required', 'city', 'country', 'description']
+    form_class = JobForm
+    #fields = ['title', 'min_salary', 'max_salary', 'status', 'experience_required', 'city', 'country', 'description']
     template_name = 'jobs/addjob.html'
     success_url = reverse_lazy('jobs:job_list')
 

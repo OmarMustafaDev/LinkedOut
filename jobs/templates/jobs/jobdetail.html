@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'jobs/css/jobdetail.css' %}" />
+{% endblock %} {% block content %}
+<div class="job-container">
+    <a href="{% url 'jobs:job_list' %}" class="back">Back</a>
+    <div class="job-details">
+        <div class="job-header">
+            <h1>{{ job.title }}</h1>
+            <span class="status {{ job.status }}"
+                >{{ job.get_status_display }}</span
+            >
+        </div>
+        <p class="company">{{ job.company_name }}</p>
+        <div class="job-main">
+            <div class="job-info">
+                <div class="item">
+                    <span>Salary</span>
+                    <p class="salary">
+                        ${{ job.min_salary }} - ${{ job.max_salary }}
+                    </p>
+                </div>
+                <div class="item">
+                    <span>Location</span>
+                    <p class="location">{{ job.city }}, {{ job.country }}</p>
+                </div>
+                <div class="item">
+                    <span>Experience</span>
+                    <p class="experience">
+                        {{ job.experience_required }} Years
+                    </p>
+                </div>
+                <div class="item">
+                    <span>Posted</span>
+                    <p class="posted">{{ job.created_at|date:"M d, Y" }}</p>
+                </div>
+            </div>
+            <hr />
+
+            <div class="job-description">
+                <h3>Job Description</h3>
+                <p class="description">{{ job.description }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="apply-div">
+        {% if user.is_authenticated %}
+            {% if is_owner %}
+                <a href="{% url 'jobs:edit_job' job.pk %}" class="edit">Edit</a>
+
+                <form
+                    action="{% url 'jobs:delete_job' job.pk %}"
+                    method="POST"
+                    style="display: inline"
+                >
+                    {% csrf_token %}
+                    <button type="submit" class="cancel">Delete</button>
+                </form>
+
+            {% elif user.role == 'user' %} 
+                {% if has_applied %}
+                    <button class="apply" disabled style="background-color: green">
+                        Already Applied
+                    </button>
+                {% else %}
+                    <form action="{% url 'jobs:apply_now' job.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="apply">Apply Now</button>
+                    </form>
+                {% endif %} 
+            {% endif %} 
+        {% else %}
+        <a href="{% url 'login' %}" class="apply">Login to Apply</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
