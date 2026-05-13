@@ -1,0 +1,117 @@
+* {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+body * {
+    font-size: max(12px, 1vw);
+}
+
+.job-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 2rem;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-size: max(18px, 2vw);
+    color: var(--text-primary);
+}
+
+#jobs-tbl,
+.menu {
+    display: flex;
+    flex-direction: column;
+    border: 1px var(--blue-border) solid;
+    margin-top: 2rem;
+    border-radius: 1rem;
+}
+
+.menu {
+    display: none;
+    background-color: white;
+    position: absolute;
+}
+
+.job,
+.option {
+    display: flex;
+    border-top: 1px var(--blue-border) solid;
+    align-items: center;
+}
+
+.job i {
+    cursor: pointer;
+}
+
+.top {
+    border: none;
+}
+
+.job-item {
+    padding: 2vh 2vw;
+    width: 20vw;
+}
+
+.menu-item {
+    padding: 1vh max(8px, 1vw);
+}
+
+.job-item *,
+.menu-item * {
+    color: var(--text-muted);
+}
+
+.menu-item * {
+    cursor: pointer;
+}
+
+.menu-item i {
+    padding-right: 5px;
+}
+
+.menu-item #delete * {
+    color: rgb(201, 0, 0);
+}
+
+.dashboard-title {
+    background-color: var(--blue-pale);
+    border-radius: 1rem 1rem 0 0;
+}
+
+.dashboard-title p {
+    color: var(--blue-main);
+    font-weight: bold;
+}
+
+.menu-btn {
+    text-align: center;
+}
+
+.menu {
+    width: fit-content;
+}
+
+.btn {
+    padding: max(10px, 0.8vw);
+}
+
+.btn-primary * {
+    color: white;
+}
+
+.open-status {
+    color: green;
+}
+
+.closed-status {
+    color: rgb(165, 0, 0);
+}

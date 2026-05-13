@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+    {% block extra_css %}
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="{% static 'jobs/css/dashboard.css' %}" />
+        
+    {% endblock extra_css %}
+    </head>
+    {% block content %}
+        <main class="job-container">
+            <header>
+                <h1>Company Dashboard</h1>
+                <p class="btn btn-primary">
+                    <a href="add-job.html">
+                        <i class="fa-solid fa-plus"></i>
+                        Add New Job
+                    </a>
+                </p>
+            </header>
+            <section id="jobs-tbl">
+                <!-- Company jobs rendered here -->
+                <div class="job dashboard-title top">
+                    <div class="job-item"><p>Job Title</p></div>
+                    <div class="job-item"><p>Salary</p></div>
+                    <div class="job-item"><p>Status</p></div>
+                    <div class="job-item"><p>Post date</p></div>
+                    <div class="job-item menu-btn"><p>Options</p></div>
+                </div>
+                
+                {% for job in jobs %}
+                <div class="job">
+                    <div class="job-item"><p>{{ job.title }}</p></div>
+                    <div class="job-item"><p>${{ job.min_salary }} - ${{ job.max_salary }}</p></div>
+                    <div class="job-item"><p class="status {{ job.status }}-status">{{ job.status }}</p></div>
+                    <div class="job-item"><p>{{ job.created_at }}</p></div>
+                    <div class="job-item menu-btn">
+                        <i class="menu-btn-icon fa-solid fa-ellipsis" 
+                            id="{{ job.id }}" 
+                            onclick="dropMenu(event)"></i>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+        </main>
+
+        <!-- Dropdown menu -->
+        <div class="menu">
+            <div class="option top">
+                <div class="menu-item">
+                    <p>
+                        <a href="job-detail.html" id="view-link">
+                            <i class="fa-solid fa-eye"></i>View
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="option">
+                <div class="menu-item">
+                    <p>
+                        <a href="job-detail.html" id="edit-link"
+                            ><i class="fa-solid fa-pen"></i>Edit
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="option">
+                <div class="menu-item">
+                    <p id="delete" class="open-dialog">
+                        <span><i class="fa-solid fa-trash"></i>Delete </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog html -->
+        <div class="overlay">
+            <div class="dialog">
+                <div class="dialog-header">
+                    <div class="dialog-title">Delete a job</div>
+                    <div class="dialog-close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+                <div class="dialog-content">
+                    Are you sure you want to delete this?
+                </div>
+                <div class="dialog-footer">
+                    <button class="dialog-btn btn-close btn-secondary">
+                        Cancel
+                    </button>
+                    <button
+                        id="dialog-delete-btn"
+                        class="dialog-btn btn-act btn-primary btn-danger"
+                    >
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endblock content %}
+        {% block extra_js %}
+            <script src="{% static "jobs/js/dashboard.js" %}"></script>
+        {% endblock extra_js %}
+    
