@@ -6,19 +6,17 @@ const dropMenu = (event) => {
     if (activeMenuId == null) {
         activeMenuId = el.id;
         menu.style = `display: flex; top: ${btnPos.top - btnPos.height}px; left: ${btnPos.right - btnPos.width}px;`;
-        document.getElementById("view-link").href =
-            `job-detail.html?job_id=${activeMenuId}&edit=false`;
+        document.getElementById("view-link").href = `../detail/${activeMenuId}`;
         document.getElementById("edit-link").href =
-            `job-detail.html?job_id=${activeMenuId}&edit=true`;
+            `../detail/${activeMenuId}/edit`;
     }
     // Menu is active elsewhere
     else if (activeMenuId != el.id && activeMenuId != null) {
         activeMenuId = el.id;
         menu.style = `display: flex; top: ${btnPos.top - btnPos.height}px; left: ${btnPos.right - btnPos.width}px;`;
-        document.getElementById("view-link").href =
-            `job-detail.html?job_id=${activeMenuId}&edit=false`;
+        document.getElementById("view-link").href = `../detail/${activeMenuId}`;
         document.getElementById("edit-link").href =
-            `job-detail.html?job_id=${activeMenuId}&edit=true`;
+            `../detail/${activeMenuId}/edit`;
     }
     // Dismiss current menu
     else {
@@ -40,8 +38,11 @@ window.addEventListener("load", () => {
 
     // Calls deleleJob with selectedJobId via dialog
     const dialogDeleteBtn = document.querySelector("#dialog-delete-btn");
-    dialogDeleteBtn.addEventListener("click", () => {
+    dialogDeleteBtn.addEventListener("click", (e) => {
         // deleteJob(selectedJobId); needs to be replaced with django delete
+        const form = document.querySelector(".dialog-form");
+        form.action = `../detail/${selectedJobId}/delete/`;
+        console.log(e);
         selectedJobId = null;
     });
 });

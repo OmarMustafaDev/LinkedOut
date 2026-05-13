@@ -1,7 +1,8 @@
 from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from ..models import Job
 
-class DashboardListView(ListView):
+class DashboardListView(LoginRequiredMixin, ListView):
     model = Job
     template_name = "jobs/dashboard.html"
     

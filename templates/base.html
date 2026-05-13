@@ -1,80 +1,77 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Job Portal{% endblock %}</title>
 
-    <title>{% block title %}Job Portal{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
 
-    <link rel="stylesheet" href="{% static 'css/global.css' %}">
-    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+        {% block extra_css %}{% endblock %}
+    </head>
 
-    {% block extra_css %}{% endblock %}
-</head>
+    <body>
+        <nav>
+            <a href="/" class="nav-brand">Job Portal</a>
 
-<body>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-<nav>
-    <a href="/" class="nav-brand">Job Portal</a>
+            <ul>
+                <!-- Home link for everyone -->
+                <li>
+                    <a href="/">Home</a>
+                </li>
 
-    <button class="nav-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
-    <ul>
-        <!-- Home link for everyone -->
-        <li>
-            <a href="/">Home</a>
-        </li>
-
-        {% if user.is_authenticated %}
-            <!-- Check if user is admin/company admin -->
-            {% if user.is_staff or user.is_superuser or user.role == 'admin' %}
+                {% if user.is_authenticated %}
+                <!-- Check if user is admin/company admin -->
+                {% if user.is_staff or user.is_superuser or user.role == 'admin'
+                %}
                 <!-- Admin/Company Admin Menu -->
                 <li>
-                    <a href="/dashboard/">Dashboard</a>
+                    <a href="/jobs/dashboard/">Dashboard</a>
                 </li>
-            {% else %}
+                {% else %}
                 <!-- Regular User Menu -->
                 <li>
-                    <a href="/jobs/">Job List</a>
+                    <a href="/jobs/list">Job List</a>
                 </li>
                 <li>
-                    <a href="/applied-jobs/">Applied Jobs</a>
+                    <a href="/jobs/applied-jobs/">Applied Jobs</a>
                 </li>
-            {% endif %}
-            
-            <!-- Common for both admin and regular user -->
-            <li>
-                <a href="/profile/">Account</a>
-            </li>
-            <li>
-                <a href="/logout/">Logout</a>
-            </li>
+                {% endif %}
 
-        {% else %}
-            <!-- Guest Menu (Logged out) -->
-            <li>
-                <a href="/login/">Login</a>
-            </li>
-            <li class="nav-cta">
-                <a href="/signup/">Sign Up</a>
-            </li>
-        {% endif %}
-    </ul>
-</nav>
+                <!-- Common for both admin and regular user -->
+                <li>
+                    <a href="/profile/">Account</a>
+                </li>
+                <li>
+                    <a href="/logout/">Logout</a>
+                </li>
 
-{% block content %}
-{% endblock %}
+                {% else %}
+                <!-- Guest Menu (Logged out) -->
+                <li>
+                    <a href="/login/">Login</a>
+                </li>
+                <li class="nav-cta">
+                    <a href="/signup/">Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
 
-<script src="{% static 'js/navbar.js' %}"></script>
+        {% block content %} {% endblock %}
 
-{% block extra_js %}{% endblock %}
+        <script src="{% static 'js/navbar.js' %}"></script>
 
-</body>
+        {% block extra_js %}{% endblock %}
+    </body>
 </html>
