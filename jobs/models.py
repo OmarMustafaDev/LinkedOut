@@ -22,3 +22,15 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class AppliedJobs(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
+    applied_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'job')
+
+    def __str__(self):
+        return f"{self.user.email} applied for {self.job.title}"
