@@ -10,4 +10,5 @@ class add_job_view(CreateView):
 
     def form_valid(self, form):
         form.instance.posted_by = self.request.user 
+        form.instance.company_name = self.request.user.company_name
         return super().form_valid(form)
