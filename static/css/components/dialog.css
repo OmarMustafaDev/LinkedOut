@@ -1,0 +1,72 @@
+.overlay {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 101;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--blue-main);
+    z-index: 102;
+    width: max(350px, 50vw);
+    background-color: var(--bg-white);
+}
+
+.dialog-header,
+.dialog-footer {
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    padding-inline: 20px;
+}
+
+.dialog-header {
+    justify-content: space-between;
+}
+
+.dialog-header * {
+    font-size: max(18px, 2vw);
+    font-weight: bold;
+}
+
+.dialog-close {
+    cursor: pointer;
+}
+
+.dialog-content {
+    font-size: max(14px, 1.2vw);
+    padding: 20px;
+    border-block: 1px var(--blue-dark) solid;
+    min-height: 10vh;
+}
+
+.dialog-footer {
+    justify-content: end;
+}
+
+.dialog-btn {
+    margin-inline: 0.5vw;
+    font-size: max(14px, 1vw);
+    padding: 10px;
+}
+
+.btn {
+    padding: max(10px, 0.8vw);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+}
+.btn-danger:hover {
+    background-color: rgb(153, 1, 1);
+}
