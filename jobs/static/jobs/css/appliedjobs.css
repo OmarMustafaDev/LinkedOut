@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: max(9px, 1vw);
+}
+
+.aj-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 2rem;
+}
+
+header h1 {
+    font-size: max(18px, 2vw);
+    color: var(--text-primary);
+}
+
+section {
+    margin-top: 10px;
+}
+
+.job {
+    padding: 30px;
+    margin-block: 15px;
+    border: 1px var(--blue-border) solid;
+    border-radius: 10px;
+}
+
+.job-title {
+    font-size: max(14px, 1.5vw);
+    font-weight: bold;
+    color: var(--blue-main);
+}
+
+.details {
+    color: var(--text-muted);
+    padding-block: 10px;
+}
+
+a[href^="job-detail.html"] {
+    color: var(--blue-mid);
+}

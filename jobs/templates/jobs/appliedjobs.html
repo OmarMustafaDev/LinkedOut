@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "jobs/css/appliedjobs.css" %}" />
+{% endblock extra_css %}
+
+{% block content %}
+    <main class="aj-container">
+        <header>
+            <h1>My Applied Jobs</h1>
+        </header>
+        <section id="applied-jobs">
+            {% for app in applied_jobs %}
+                <div class="card job">
+                    <p class="job-title">{{ app.job.title }}</p>
+                    <p class="details">Company: {{ app.job.company_name }}</p>
+                    <p class="details">Apply date: {{ app.applied_at }}</p>
+                    <a href="{% url "jobs:job_detail" pk=app.job.id %}" class="details"
+                        >View job details &rarr;</a
+                    >
+                </div>
+                {% empty %}
+                <span style="display: flex; justify-content: center; border: 0; margin-top: 20px;">
+                    <p style="color: var(--text-muted);">Nothing here. Go apply for some jobs!</p>
+                </span>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock content %}
