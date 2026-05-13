@@ -22,9 +22,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-nav {
-  position: fixed;
-}
 
 .login-box {
   background-color: aliceblue;
