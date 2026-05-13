@@ -31,39 +31,38 @@
                 </li>
 
                 {% if user.is_authenticated %}
-                <!-- Check if user is admin/company admin -->
-                {% if user.is_staff or user.is_superuser or user.role == 'admin'
-                %}
-                <!-- Admin/Company Admin Menu -->
-                <li>
-                    <a href="/jobs/dashboard/">Dashboard</a>
-                </li>
-                {% else %}
-                <!-- Regular User Menu -->
-                <li>
-                    <a href="/jobs/list">Job List</a>
-                </li>
-                <li>
-                    <a href="/jobs/applied-jobs/">Applied Jobs</a>
-                </li>
-                {% endif %}
+                    <!-- Check if user is admin/company admin -->
+                    {%if user.is_staff or user.is_superuser or user.role == 'admin' %}
+                        <!-- Admin/Company Admin Menu -->
+                        <li>
+                            <a href="/jobs/dashboard/">Dashboard</a>
+                        </li>
+                    {% else %}
+                        <!-- Regular User Menu -->
+                        <li>
+                            <a href="/jobs/list">Job List</a>
+                        </li>
+                        <li>
+                            <a href="/jobs/applied-jobs/">Applied Jobs</a>
+                        </li>
+                    {% endif %}
 
-                <!-- Common for both admin and regular user -->
-                <li>
-                    <a href="/profile/">Account</a>
-                </li>
-                <li>
-                    <a href="/logout/">Logout</a>
-                </li>
+                    <!-- Common for both admin and regular user -->
+                    <li>
+                        <a href="/profile/">Account</a>
+                    </li>
+                    <li>
+                        <a href="/logout/">Logout</a>
+                    </li>
 
-                {% else %}
-                <!-- Guest Menu (Logged out) -->
-                <li>
-                    <a href="/login/">Login</a>
-                </li>
-                <li class="nav-cta">
-                    <a href="/signup/">Sign Up</a>
-                </li>
+                    {% else %}
+                        <!-- Guest Menu (Logged out) -->
+                        <li>
+                            <a href="/login/">Login</a>
+                        </li>
+                        <li class="nav-cta">
+                            <a href="/signup/">Sign Up</a>
+                        </li>
                 {% endif %}
             </ul>
         </nav>
