@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home — Job Portal{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-badge">
+        ✨ Your Next Career Move Starts Here
+    </div>
+
+    <h1>
+        Find Your <span>Dream Job</span><br>
+        With Ease
+    </h1>
+
+    <p>
+        Connect with leading companies, apply in seconds, and track your career journey —
+        all in one place. Whether it's your first step or next big move, we've got you.
+    </p>
+
+    <div class="hero-btns">
+
+        {% if user.is_authenticated %}
+
+            <a href="/jobs/" class="btn-primary">
+                Browse Jobs
+            </a>
+
+        {% else %}
+
+            <a href="/signup/" class="btn-primary">
+                Get Started
+            </a>
+
+            <a href="/jobs/" class="btn-secondary">
+                Browse Jobs
+            </a>
+
+        {% endif %}
+
+    </div>
+</section>
+
+
+<div class="stats-bar">
+
+    <div class="stat-item">
+        <div class="num">500+</div>
+        <div class="label">Job Listings</div>
+    </div>
+
+    <div class="stat-item">
+        <div class="num">200+</div>
+        <div class="label">Companies</div>
+    </div>
+
+    <div class="stat-item">
+        <div class="num">10k+</div>
+        <div class="label">Candidates</div>
+    </div>
+
+    <div class="stat-item">
+        <div class="num">98%</div>
+        <div class="label">Satisfaction</div>
+    </div>
+
+</div>
+
+
+<div class="features">
+
+    <div class="card">
+        <div class="card-icon icon-blue">🔍</div>
+
+        <h3>Easy Search</h3>
+
+        <p>
+            Search and filter through hundreds of job opportunities tailored
+            to your skills and experience level.
+        </p>
+    </div>
+
+
+    <div class="card">
+        <div class="card-icon icon-indigo">🏢</div>
+
+        <h3>Top Companies</h3>
+
+        <p>
+            Connect with industry-leading companies actively looking for
+            talented professionals like you.
+        </p>
+    </div>
+
+
+    <div class="card">
+        <div class="card-icon icon-violet">⚡</div>
+
+        <h3>Quick Apply</h3>
+
+        <p>
+            Apply to multiple jobs with just a few clicks and track all your
+            applications in one organized dashboard.
+        </p>
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 Job Portal — All rights reserved
+</footer>
+
+{% endblock %}

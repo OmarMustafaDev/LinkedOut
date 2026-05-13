@@ -1,26 +1,80 @@
 {% load static %}
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{% block title %}LinkedOut{% endblock %}</title>
 
-        <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% block extra_css %}{% endblock %}
-        <link
-            rel="stylesheet"
-            href="{% static 'css/components/dialog.css' %}"
-        />
-    </head>
+    <title>{% block title %}Job Portal{% endblock %}</title>
 
-    <body>
-        <nav></nav>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
-        <main>{% block content %} {% endblock %}</main>
+    {% block extra_css %}{% endblock %}
+</head>
 
-        <script src="{% static "js/components/dialog.js" %}"></script>
-        {% block extra_js %}{% endblock %}
-    </body>
+<body>
+
+<nav>
+    <a href="/" class="nav-brand">Job Portal</a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <ul>
+        <!-- Home link for everyone -->
+        <li>
+            <a href="/">Home</a>
+        </li>
+
+        {% if user.is_authenticated %}
+            <!-- Check if user is admin/company admin -->
+            {% if user.is_staff or user.is_superuser or user.role == 'admin' %}
+                <!-- Admin/Company Admin Menu -->
+                <li>
+                    <a href="/dashboard/">Dashboard</a>
+                </li>
+            {% else %}
+                <!-- Regular User Menu -->
+                <li>
+                    <a href="/jobs/">Job List</a>
+                </li>
+                <li>
+                    <a href="/applied-jobs/">Applied Jobs</a>
+                </li>
+            {% endif %}
+            
+            <!-- Common for both admin and regular user -->
+            <li>
+                <a href="/profile/">Account</a>
+            </li>
+            <li>
+                <a href="/logout/">Logout</a>
+            </li>
+
+        {% else %}
+            <!-- Guest Menu (Logged out) -->
+            <li>
+                <a href="/login/">Login</a>
+            </li>
+            <li class="nav-cta">
+                <a href="/signup/">Sign Up</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+<script src="{% static 'js/navbar.js' %}"></script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
 </html>
