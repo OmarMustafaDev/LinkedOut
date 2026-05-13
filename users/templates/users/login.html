@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'users/css/login.css'%}" />
+    <link rel = "icon" href="assets/images/Jp (1).png" type="image/x-icon">
+  </head>
+
+    <div class="container">
+      <div class="login-box">
+        <h1>Login</h1>
+        <form id="loginForm" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+          <label for="email"> Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="username"
+            placeholder="Enter your Email"
+            required
+          />
+
+          <label for="password"> Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your Password"
+            required
+          />
+
+          <button type="submit" value="LOGIN">Login</button>
+        </form>
+          {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+        <p class="no-account">Don't have an account? <a class="signup" href="{% url 'signup' %}">Sign Up</a></p>
+      </div>
+    </div>
+    <script src="JS/login.js"></script>
+    <script src="js/navbar.js"></script>
+
+{% endblock %}
+

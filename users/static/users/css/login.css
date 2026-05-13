@@ -1,0 +1,102 @@
+* {
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-decoration: none;
+  color: black;
+  margin: 0;
+  padding: 0;
+  font-size: max(9px, 1vw);
+}
+
+body {
+  background-image: url("../../../../static/images/login_photo.jpeg");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav {
+  position: fixed;
+}
+
+.login-box {
+  background-color: aliceblue;
+  /* center */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* glassmorphism */
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+
+  padding: 10px;
+  gap: 20px;
+  text-align: center;
+
+  width: min(350px, 90%);
+  margin: auto;
+}
+html {
+  height: 100vh;
+}
+
+form {
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  font-size: 14px;
+  box-sizing: border-box;
+}
+label {
+  font-size: 14px;
+  font-weight: bold;
+}
+button {
+  width: 100%;
+  padding: 12px;
+
+  background-color: #155dfc;
+  color: white;
+
+  border: none;
+  border-radius: 20px;
+
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004182;
+}
+
+h1{
+  font-size: max(4vh,18px);
+}
+
+.no-account{
+  font-size: max(2vh,14px);
+}
+
+.signup{
+  color: #155dfc;
+  font-size: max(2vh,14px);
+}
