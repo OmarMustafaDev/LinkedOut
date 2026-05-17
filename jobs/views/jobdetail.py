@@ -20,7 +20,6 @@ class JobDetailView(DetailView):
         job = self.get_object()
         if user.is_authenticated:
             context['is_owner'] = (user.role == 'admin' and job.posted_by == user)
-            # This is the "Search" part of your old JS logic
             context['has_applied'] = AppliedJobs.objects.filter(
                 user=self.request.user,
                 job=self.get_object()
@@ -54,22 +53,20 @@ class ApplyJobView(LoginRequiredMixin, View):
 class JobUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Job
     fields = ['title', 'company_name', 'min_salary', 'max_salary', 'status', 'description']
-    template_name = 'jobs/addjob.html' # Reuse your Add Job template
+    template_name = 'jobs/addjob.html'
 
     def test_func(self):
-        # Security: Only the user who posted it can edit
         job = self.get_object()
         return self.request.user == job.posted_by
 
     def get_success_url(self):
         return reverse_lazy('jobs:job_detail', kwargs={'pk': self.object.pk})
 
-# 3. DELETE: Remove the Job
+
 class JobDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Job
     success_url = reverse_lazy('jobs:job_list')
 
     def test_func(self):
-        # Security: Only the user who posted it can delete
         job = self.get_object()
         return self.request.user == job.posted_by
