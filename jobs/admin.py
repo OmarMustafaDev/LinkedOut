@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Job, AppliedJobs
 
 # Register your models here.
-admin.site.register(Job)
+@admin.register(Job)
 class JobAdmin(admin.ModelAdmin):
     list_display = ('title', 'company_name', 'posted_by', 'created_at')
 
