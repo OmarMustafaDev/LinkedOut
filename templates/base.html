@@ -32,6 +32,9 @@
 
                 {% if user.is_authenticated %}
                     <!-- Check if user is admin/company admin -->
+                    <li>
+                        <a href="/jobs/list">Job List</a>
+                    </li>
                     {%if user.role == 'admin' %}
                         <!-- Admin/Company Admin Menu -->
                         <li>
@@ -39,9 +42,6 @@
                         </li>
                     {% else %}
                         <!-- Regular User Menu -->
-                        <li>
-                            <a href="/jobs/list">Job List</a>
-                        </li>
                         <li>
                             <a href="/jobs/applied-jobs/">Applied Jobs</a>
                         </li>
