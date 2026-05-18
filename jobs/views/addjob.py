@@ -6,7 +6,6 @@ from jobs.forms import JobForm
 class add_job_view(CreateView):
     model = Job
     form_class = JobForm
-    #fields = ['title', 'min_salary', 'max_salary', 'status', 'experience_required', 'city', 'country', 'description']
     template_name = 'jobs/addjob.html'
     success_url = reverse_lazy('jobs:job_list')
 
