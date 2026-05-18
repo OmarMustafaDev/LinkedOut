@@ -44,8 +44,10 @@
         <p class="no-account">Don't have an account? <a class="signup" href="{% url 'signup' %}">Sign Up</a></p>
       </div>
     </div>
-    <script src="JS/login.js"></script>
-    <script src="js/navbar.js"></script>
-
+    
 {% endblock %}
+
+{% block extra_js %}
+    <script src="{% static "users/js/login.js" %}"></script>
+{% endblock extra_js %}
 
