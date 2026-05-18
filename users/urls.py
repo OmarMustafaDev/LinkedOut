@@ -4,10 +4,7 @@ from .views.profile import profile_view
 from .views.login import login_view
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-
-def logout_view(request):
-    logout(request)
-    return redirect('/')
+from .views.logout import logout_view
 
 urlpatterns = [
     path('login/', login_view.as_view(), name='login'),  
